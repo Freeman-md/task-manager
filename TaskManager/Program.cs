@@ -8,8 +8,7 @@ namespace TaskManager
         {
             string selectedInput;
 
-            Console.WriteLine("Welcome to the Task Manager CLI!");
-            Console.WriteLine("This application helps you manage your tasks efficiently.");
+            DisplayWelcomeMessage();
 
             do
             {
@@ -20,8 +19,8 @@ namespace TaskManager
                 switch (selectedInput)
                 {
                     case "1":
-                        // create task
                         Console.WriteLine("Creating a new task...");
+                        TaskManager.CreateTask();
                         break;
                     case "2":
                         // view tasks
@@ -48,22 +47,53 @@ namespace TaskManager
                         }
                         break;
                     default:
+                        Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("Invalid option. Please try again.");
+                        Console.ResetColor();
                         break;
                 }
             } while (selectedInput != "5");
 
-            Console.WriteLine("Thank you for using the Task Manager CLI. Goodbye!");
+            DisplayGoodbyeMessage();
+        }
+
+        static void DisplayWelcomeMessage()
+        {
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("*********************************************");
+            Console.WriteLine("*                                           *");
+            Console.WriteLine("*       Welcome to the Task Manager CLI      *");
+            Console.WriteLine("*                                           *");
+            Console.WriteLine("*********************************************");
+            Console.ResetColor();
+
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("\nThis application helps you manage your tasks efficiently.");
+            Console.ResetColor();
         }
 
         static void DisplayMenu()
         {
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("\nPlease choose an option from the menu below:");
             Console.WriteLine("1. Create a new task");
             Console.WriteLine("2. View all tasks");
             Console.WriteLine("3. Edit a task");
             Console.WriteLine("4. Delete a task");
             Console.WriteLine("5. Exit");
+            Console.ResetColor();
+        }
+
+        static void DisplayGoodbyeMessage()
+        {
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("\n*********************************************");
+            Console.WriteLine("*                                           *");
+            Console.WriteLine("*      Thank you for using Task Manager     *");
+            Console.WriteLine("*             Have a great day!             *");
+            Console.WriteLine("*                                           *");
+            Console.WriteLine("*********************************************");
+            Console.ResetColor();
         }
     }
 }
