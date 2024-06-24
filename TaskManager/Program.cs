@@ -23,8 +23,8 @@ namespace TaskManager
                         TaskManager.CreateTask();
                         break;
                     case "2":
-                        // view tasks
                         Console.WriteLine("Viewing all tasks...");
+                        TaskManager.ViewTasks();
                         break;
                     case "3":
                         // edit task

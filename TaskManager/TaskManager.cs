@@ -33,6 +33,21 @@ namespace TaskManager
                 Console.ResetColor();
             }
         }
+
+        public static void ViewTasks()
+        {
+            if (tasks.Count == 0)
+            {
+                Console.WriteLine("No tasks available.");
+            }
+            else
+            {
+                foreach (var task in tasks)
+                {
+                    task.ToConsole();
+                }
+            }
+        }
     }
 }
 

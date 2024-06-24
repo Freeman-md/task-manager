@@ -15,6 +15,22 @@ namespace TaskManager
             TaskPriority = taskPriority;
             Deadline = deadline ?? DateTime.Now;
         }
+
+        public void ToConsole()
+        {
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("=========================================");
+            Console.ResetColor();
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine($"Title: {Title}");
+            Console.ResetColor();
+            Console.WriteLine($"Description: {Description}");
+            Console.WriteLine($"Priority: {TaskPriority}");
+            Console.WriteLine($"Deadline: {Deadline.ToShortDateString()}");
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("=========================================\n");
+            Console.ResetColor();
+        }
     }
 }
 
