@@ -11,7 +11,31 @@ namespace TaskManager
 		{
 		}
 
-		public static void CreateTask()
+        private static Task FindTaskByTitle()
+        {
+            Task task;
+
+            do
+            {
+                // Get task title user would like to edit
+                string taskTitle = Utilities.GetValidInput("Enter the title of the task you want to edit: ").ToLower();
+
+                // Find task by title
+                task = tasks.Find(t => t.Title.ToLower().Contains(taskTitle));
+
+                if (task == null)
+                {
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine($"Task with title '{taskTitle}' not found");
+                    Console.ResetColor();
+                }
+
+            } while (task == null);
+
+            return task;
+        }
+
+        public static void CreateTask()
 		{
             string title = Utilities.GetValidInput("Enter the task title: ");
             string description = Utilities.GetValidInput("Enter the task description: ");
@@ -47,6 +71,28 @@ namespace TaskManager
                     task.ToConsole();
                 }
             }
+        }
+
+        public static void EditTask()
+        {
+            Task task = FindTaskByTitle();
+
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("Leave any field blank to keep the current value.");
+            Console.ResetColor();
+
+            string title = Utilities.GetValidInput($"Title (current: {task.Title}): ", task.Title);
+            string description = Utilities.GetValidInput($"Description (current: {task.Description}): ", task.Description);
+            TaskPriority priority = Utilities.GetValidEnum<TaskPriority>($"Priority (current: {task.TaskPriority}, options: high, medium, low): ", task.TaskPriority);
+            DateTime deadline = Utilities.GetValidDateTime($"Deadline (current: {task.Deadline:yyyy-MM-dd}): ", task.Deadline);
+
+            task.Update(title, description, priority, deadline);
+
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Task updated successfully");
+            Console.ResetColor();
+
+            task.ToConsole();
         }
     }
 }

@@ -10,10 +10,15 @@ namespace TaskManager
 
         public Task(string title, string description, TaskPriority taskPriority = TaskPriority.MEDIUM, DateTime? deadline = null)
         {
+            Update(title, description, taskPriority, deadline ?? DateTime.Now);
+        }
+
+        public void Update(string title, string description, TaskPriority taskPriority, DateTime deadline)
+        {
             Title = title;
             Description = description;
             TaskPriority = taskPriority;
-            Deadline = deadline ?? DateTime.Now;
+            Deadline = deadline;
         }
 
         public void ToConsole()

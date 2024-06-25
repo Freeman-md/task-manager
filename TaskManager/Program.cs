@@ -27,8 +27,8 @@ namespace TaskManager
                         TaskManager.ViewTasks();
                         break;
                     case "3":
-                        // edit task
                         Console.WriteLine("Editing a task...");
+                        TaskManager.EditTask();
                         break;
                     case "4":
                         // delete task

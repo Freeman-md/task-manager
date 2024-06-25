@@ -7,7 +7,7 @@ namespace TaskManager
 		{
 		}
 
-		public static string GetValidInput(string prompt)
+		public static string GetValidInput(string prompt, string defaultValue = "")
 		{
             string input;
 
@@ -15,35 +15,67 @@ namespace TaskManager
             {
                 Console.Write(prompt);
                 input = Console.ReadLine().Trim();
+
+                input = input.Length > 0
+                        ? input
+                        : defaultValue;
             } while (string.IsNullOrEmpty(input));
 
             return input;
         }
 
-        public static T GetValidEnum<T>(string prompt) where T : struct, Enum
+        public static T GetValidEnum<T>(string prompt, T? defaultValue = null) where T : struct, Enum
         {
             T result;
-            Console.Write(prompt);
-            while (!Enum.TryParse(Console.ReadLine().ToUpper(), out result))
+            string input;
+
+            do
             {
+                Console.Write(prompt);
+                input = Console.ReadLine().Trim();
+
+                if (string.IsNullOrEmpty(input) && defaultValue.HasValue)
+                {
+                    return defaultValue.Value;
+                }
+
+                if (Enum.TryParse(input.ToUpper(), out result))
+                {
+                    return result;
+                }
+
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.Write($"Invalid input. {prompt}");
+                Console.WriteLine("Invalid input. Please enter a valid value.");
                 Console.ResetColor();
-            }
-            return result;
+
+            } while (true);
         }
 
-        public static DateTime GetValidDateTime(string prompt)
+        public static DateTime GetValidDateTime(string prompt, DateTime? defaultValue = null)
         {
             DateTime result;
-            Console.Write(prompt);
-            while (!DateTime.TryParse(Console.ReadLine(), out result))
+            string input;
+
+            do
             {
+                Console.Write(prompt);
+                input = Console.ReadLine().Trim();
+
+                if (string.IsNullOrEmpty(input) && defaultValue.HasValue)
+                {
+                    return defaultValue.Value;
+                }
+
+                if (DateTime.TryParse(input, out result))
+                {
+                    return result;
+                }
+
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.Write($"Invalid date format. {prompt}");
+                Console.WriteLine("Invalid date format. Please enter a valid date.");
                 Console.ResetColor();
-            }
-            return result;
+
+            } while (true);
         }
     }
 }
