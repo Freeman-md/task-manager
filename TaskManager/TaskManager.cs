@@ -94,6 +94,17 @@ namespace TaskManager
 
             task.ToConsole();
         }
+
+        public static void DeleteTask() {
+            Task task = FindTaskByTitle();
+
+            tasks.Remove(task);
+
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Task deleted successfully");
+            Console.ResetColor();
+        }
+
     }
 }
 

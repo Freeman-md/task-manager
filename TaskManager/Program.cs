@@ -31,8 +31,8 @@ namespace TaskManager
                         TaskManager.EditTask();
                         break;
                     case "4":
-                        // delete task
                         Console.WriteLine("Deleting a task...");
+                        TaskManager.DeleteTask();
                         break;
                     case "5":
                         Console.Write("Are you sure you want to exit? (y/n) ");
