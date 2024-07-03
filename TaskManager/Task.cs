@@ -1,5 +1,5 @@
 ﻿using System;
-namespace TaskManager
+namespace TaskRepository
 {
 	public class Task
 	{

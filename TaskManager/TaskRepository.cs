@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace TaskManager
+namespace TaskRepository
 {
-	public class TaskManager
-	{
+	public class TaskRepository
+    {
         private static List<Task> tasks = new List<Task>();
 
-		public TaskManager()
+		public TaskRepository()
 		{
 		}
 

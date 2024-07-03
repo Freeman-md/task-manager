@@ -1,12 +1,14 @@
 ﻿using System;
 
-namespace TaskManager
+namespace TaskRepository
 {
     class Program
     {
         static void Main(string[] args)
         {
             string selectedInput;
+
+            // TODO: Load Tasks
 
             DisplayWelcomeMessage();
 
@@ -20,19 +22,19 @@ namespace TaskManager
                 {
                     case "1":
                         Console.WriteLine("Creating a new task...");
-                        TaskManager.CreateTask();
+                        TaskRepository.CreateTask();
                         break;
                     case "2":
                         Console.WriteLine("Viewing all tasks...");
-                        TaskManager.ViewTasks();
+                        TaskRepository.ViewTasks();
                         break;
                     case "3":
                         Console.WriteLine("Editing a task...");
-                        TaskManager.EditTask();
+                        TaskRepository.EditTask();
                         break;
                     case "4":
                         Console.WriteLine("Deleting a task...");
-                        TaskManager.DeleteTask();
+                        TaskRepository.DeleteTask();
                         break;
                     case "5":
                         Console.Write("Are you sure you want to exit? (y/n) ");
