@@ -10,11 +10,11 @@ namespace TaskRepository
 
             DisplayWelcomeMessage();
 
+            TaskRepository.LoadTasks();
+
             do
             {
                 DisplayMenu();
-
-                TaskRepository.LoadTasks();
 
                 selectedInput = Console.ReadLine();
 

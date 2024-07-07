@@ -8,7 +8,9 @@ namespace TaskRepository
 {
 	public class Utilities
 	{
-		public Utilities()
+        private static string directory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "TaskManager");
+
+        public Utilities()
 		{
 		}
 
@@ -83,10 +85,17 @@ namespace TaskRepository
             } while (true);
         }
 
-        public static void SaveToFile<T>(string path, T content)
+        public static void SaveToFile<T>(string fileName, T content)
         {
             try
             {
+                if (!Directory.Exists(directory))
+                {
+                    Directory.CreateDirectory(directory);
+                }
+
+                var path = Path.Combine(directory, fileName);
+
                 var options = new JsonSerializerOptions
                 {
                     WriteIndented = true, // Makes the JSON output pretty-printed
@@ -103,10 +112,12 @@ namespace TaskRepository
             }
         }
 
-        public static T LoadFromFile<T>(string path) where T : new()
+        public static T LoadFromFile<T>(string fileName) where T : new()
         {
             try
             {
+                var path = Path.Combine(directory, fileName);
+
                 if (!File.Exists(path))
                 {
                     Console.WriteLine("File not found. Returning default content.");

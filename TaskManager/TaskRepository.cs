@@ -6,9 +6,7 @@ namespace TaskRepository
 {
 	public class TaskRepository
     {
-        private static string directory = @"/Users/freemancodz/Documents/TaskManager/";
         private static string fileName = "tasks.json";
-        private static string path = $"{directory}{fileName}";
         private static List<Task> tasks = new List<Task>();
 
 		public TaskRepository()
@@ -41,7 +39,7 @@ namespace TaskRepository
 
         public static void LoadTasks()
         {
-            tasks = Utilities.LoadFromFile<List<Task>>(path);
+            tasks = Utilities.LoadFromFile<List<Task>>(fileName);
 
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine($"Loaded {tasks.Count} task(s)");
@@ -60,7 +58,7 @@ namespace TaskRepository
                 Task task = new Task(title, description, priority, deadline);
 
                 tasks.Add(task);
-                Utilities.SaveToFile<List<Task>>(path, tasks);
+                Utilities.SaveToFile<List<Task>>(fileName, tasks);
 
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Task created successfully.");
@@ -102,7 +100,7 @@ namespace TaskRepository
             DateTime deadline = Utilities.GetValidDateTime($"Deadline (current: {task.Deadline:yyyy-MM-dd}): ", task.Deadline);
 
             task.Update(title, description, priority, deadline);
-            Utilities.SaveToFile<List<Task>>(path, tasks);
+            Utilities.SaveToFile<List<Task>>(fileName, tasks);
 
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Task updated successfully");
@@ -115,7 +113,7 @@ namespace TaskRepository
             Task task = FindTaskByTitle();
 
             tasks.Remove(task);
-            Utilities.SaveToFile<List<Task>>(path, tasks);
+            Utilities.SaveToFile<List<Task>>(fileName, tasks);
 
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Task deleted successfully");
