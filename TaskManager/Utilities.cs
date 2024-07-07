@@ -102,6 +102,31 @@ namespace TaskRepository
                 throw;
             }
         }
+
+        public static T LoadFromFile<T>(string path) where T : new()
+        {
+            try
+            {
+                if (!File.Exists(path))
+                {
+                    Console.WriteLine("File not found. Returning default content.");
+                    return new T();
+                }
+
+                string jsonString = File.ReadAllText(path);
+                var options = new JsonSerializerOptions
+                {
+                    Converters = { new JsonStringEnumConverter() }
+                };
+                return JsonSerializer.Deserialize<T>(jsonString, options);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred while loading content from file: {ex.Message}");
+                return new T(); // Return a new instance in case of error
+            }
+        }
+
     }
 }
 

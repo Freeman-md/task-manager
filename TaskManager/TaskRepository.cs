@@ -39,6 +39,15 @@ namespace TaskRepository
             return task;
         }
 
+        public static void LoadTasks()
+        {
+            tasks = Utilities.LoadFromFile<List<Task>>(path);
+
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine($"Loaded {tasks.Count} task(s)");
+            Console.ResetColor();
+        }
+
         public static void CreateTask()
 		{
             string title = Utilities.GetValidInput("Enter the task title: ");

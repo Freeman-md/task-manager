@@ -9,6 +9,10 @@ namespace TaskRepository
         public TaskPriority Priority { get; set; }
         public DateTime Deadline { get; set; }
 
+        public Task()
+        {
+        }
+
         public Task(string title, string description, TaskPriority priority = TaskPriority.MEDIUM, DateTime? deadline = null)
         {
             Update(title, description, priority, deadline ?? DateTime.Now);

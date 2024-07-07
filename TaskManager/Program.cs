@@ -8,13 +8,13 @@ namespace TaskRepository
         {
             string selectedInput;
 
-            // TODO: Load Tasks from file
-
             DisplayWelcomeMessage();
 
             do
             {
                 DisplayMenu();
+
+                TaskRepository.LoadTasks();
 
                 selectedInput = Console.ReadLine();
 
