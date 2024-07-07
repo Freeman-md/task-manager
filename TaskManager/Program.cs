@@ -8,7 +8,7 @@ namespace TaskRepository
         {
             string selectedInput;
 
-            // TODO: Load Tasks
+            // TODO: Load Tasks from file
 
             DisplayWelcomeMessage();
 

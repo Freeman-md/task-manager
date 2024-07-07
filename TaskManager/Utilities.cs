@@ -1,4 +1,9 @@
 ﻿using System;
+using System.IO;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.Threading.Tasks;
+
 namespace TaskRepository
 {
 	public class Utilities
@@ -76,6 +81,26 @@ namespace TaskRepository
                 Console.ResetColor();
 
             } while (true);
+        }
+
+        public static void SaveToFile<T>(string path, T content)
+        {
+            try
+            {
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true, // Makes the JSON output pretty-printed
+                    Converters = { new JsonStringEnumConverter() } // Handle enum serialization
+                };
+
+                string jsonString = JsonSerializer.Serialize(content, options);
+
+                File.WriteAllText(path, jsonString);
+            }
+            catch
+            {
+                throw;
+            }
         }
     }
 }
